@@ -4,7 +4,7 @@
 - **Lastname**: Jbeili
 
 
-> **TP1**
+- **TP1**
 > - J'ai apporté des améliorations au code en utilisant les principes SOLID. J'ai séparé chaque classe avec une seule responsabilité, respectant ainsi le principe de responsabilité unique (SRP). Le code est désormais ouvert à l'extension conformément au principe ouvert/fermé (OCP) grâce à l'introduction de classes spécifiques pour chaque type de fichier. De plus, j'ai veillé à ce que les sous-classes suivent le contrat de l'interface FileHandler, respectant ainsi le principe de substitution de Liskov (LSP). J'ai également inversé les dépendances en utilisant l'interface FileAccess, conformément au principe d'inversion des dépendances (DIP). Enfin, j'ai respecté le principe de ségrégation des interfaces (ISP) en concevant des interfaces spécifiques aux besoins de chaque classe. Ces modifications ont rendu le code plus modulaire, extensible et conforme aux principes SOLID
 
 > 
