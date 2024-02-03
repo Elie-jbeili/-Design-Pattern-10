@@ -28,4 +28,5 @@
 
 >- Enfin, j'ai remanié la méthode exec dans la classe App pour gérer correctement l'option --done, en passant les arguments nécessaires au FileHandler. Grâce à ces améliorations, notre application est désormais capable d'ajouter des tâches avec un statut done et de filtrer les tâches affichées en fonction de leur état d'achèvement. Ces modifications renforcent considérablement la fonctionnalité et la flexibilité de notre application.
 
+![image](https://github.com/Elie-jbeili/-Design-Pattern-10/assets/117976718/d949f332-9287-4acc-b5e4-b7d184db7af2)
 
