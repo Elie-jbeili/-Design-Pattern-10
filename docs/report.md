@@ -19,5 +19,12 @@
  
 > ![UML](https://github.com/Elie-jbeili/-Design-Pattern-10/assets/117976718/4a790c4e-4c36-4144-a717-0ba5fd832723)
 
-> 
+>
+- **TP1**
+
+>J'ai récemment amélioré notre application de gestion de tâches en y ajoutant une fonctionnalité clé. Tout d'abord, j'ai intégré l'option --done dans le système de gestion des arguments de ligne de commande. Cette modification permet désormais de marquer les tâches comme étant accomplies dès leur ajout. Ensuite, j'ai ajusté l'interface FileHandler, modifiant la méthode insert pour qu'elle accepte un paramètre booléen isDone. Cette modification est essentielle pour suivre l'état des tâches.
+
+Pour les gestionnaires de fichiers spécifiques, JsonFileHandler et CsvFileHandler, j'ai procédé à des mises à jour significatives. Dans JsonFileHandler, j'ai adapté les méthodes insert et list pour traiter et afficher l'état done des tâches, les stockant comme des objets JSON avec les champs todo et done. De même, dans CsvFileHandler, j'ai ajusté ces méthodes pour prendre en charge l'état done, enregistrant les tâches dans un format CSV simple.
+
+Enfin, j'ai remanié la méthode exec dans la classe App pour gérer correctement l'option --done, en passant les arguments nécessaires au FileHandler. Grâce à ces améliorations, notre application est désormais capable d'ajouter des tâches avec un statut done et de filtrer les tâches affichées en fonction de leur état d'achèvement. Ces modifications renforcent considérablement la fonctionnalité et la flexibilité de notre application.
 
