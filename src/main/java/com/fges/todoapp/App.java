@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.MissingNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.cli.*;
 
 import java.io.IOException;
@@ -32,8 +33,8 @@ class SimpleFileAccess implements FileAccess {
 }
 
 interface FileHandler {
-    void insert(String todo) throws IOException;
-    void list() throws IOException;
+    void insert(String todo, boolean isDone) throws IOException;
+    void list(boolean onlyDone) throws IOException;
 }
 
 class JsonFileHandler implements FileHandler {
@@ -46,7 +47,7 @@ class JsonFileHandler implements FileHandler {
     }
 
     @Override
-    public void insert(String todo) throws IOException {
+    public void insert(String todo, boolean isDone) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String fileContent = fileAccess.readFileContent(filePath);
         JsonNode actualObj = mapper.readTree(fileContent);
@@ -55,14 +56,17 @@ class JsonFileHandler implements FileHandler {
         }
 
         if (actualObj instanceof ArrayNode) {
-            ((ArrayNode) actualObj).add(todo);
+            ObjectNode todoNode = JsonNodeFactory.instance.objectNode();
+            todoNode.put("todo", todo);
+            todoNode.put("done", isDone);
+            ((ArrayNode) actualObj).add(todoNode);
         }
 
         fileAccess.writeFileContent(filePath, actualObj.toString());
     }
 
     @Override
-    public void list() throws IOException {
+    public void list(boolean onlyDone) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String fileContent = fileAccess.readFileContent(filePath);
         JsonNode actualObj = mapper.readTree(fileContent);
@@ -71,7 +75,13 @@ class JsonFileHandler implements FileHandler {
         }
 
         if (actualObj instanceof ArrayNode) {
-            ((ArrayNode) actualObj).forEach(node -> System.out.println("- " + node.asText()));
+            ((ArrayNode) actualObj).forEach(node -> {
+                boolean isDone = node.get("done").asBoolean();
+                if (!onlyDone || isDone) {
+                    String prefix = isDone ? "Done: " : "";
+                    System.out.println(prefix + node.get("todo").asText());
+                }
+            });
         }
     }
 }
@@ -86,22 +96,26 @@ class CsvFileHandler implements FileHandler {
     }
 
     @Override
-    public void insert(String todo) throws IOException {
+    public void insert(String todo, boolean isDone) throws IOException {
         String fileContent = fileAccess.readFileContent(filePath);
         if (!fileContent.endsWith("\n") && !fileContent.isEmpty()) {
             fileContent += "\n";
         }
-        fileContent += todo;
+        fileContent += todo + "," + isDone;
 
         fileAccess.writeFileContent(filePath, fileContent);
     }
 
     @Override
-    public void list() throws IOException {
+    public void list(boolean onlyDone) throws IOException {
         String fileContent = fileAccess.readFileContent(filePath);
-        System.out.println(Arrays.stream(fileContent.split("\n"))
-                .map(todo -> "- " + todo)
-                .collect(Collectors.joining("\n")));
+        Arrays.stream(fileContent.split("\n"))
+                .filter(line -> !onlyDone || line.endsWith("true"))
+                .forEach(line -> {
+                    String[] parts = line.split(",");
+                    String prefix = parts.length > 1 && Boolean.parseBoolean(parts[1]) ? "Done: " : "";
+                    System.out.println(prefix + parts[0]);
+                });
     }
 }
 
@@ -126,9 +140,10 @@ public class App {
 
     public static int exec(String[] args) throws IOException {
         Options cliOptions = new Options();
-        CommandLineParser parser = new DefaultParser();
         cliOptions.addRequiredOption("s", "source", true, "File containing the todos");
+        cliOptions.addOption("d", "done", false, "Mark the todo as done");
 
+        CommandLineParser parser = new DefaultParser();
         CommandLine cmd;
         try {
             cmd = parser.parse(cliOptions, args);
@@ -138,6 +153,7 @@ public class App {
         }
 
         String fileName = cmd.getOptionValue("s");
+        boolean isDone = cmd.hasOption("done");
         List<String> positionalArgs = cmd.getArgList();
         if (positionalArgs.isEmpty()) {
             System.err.println("Missing Command");
@@ -154,10 +170,10 @@ public class App {
                     System.err.println("Missing TODO name");
                     return 1;
                 }
-                fileHandler.insert(positionalArgs.get(1));
+                fileHandler.insert(positionalArgs.get(1), isDone);
                 break;
             case "list":
-                fileHandler.list();
+                fileHandler.list(isDone);
                 break;
             default:
                 System.err.println("Unknown Command");
