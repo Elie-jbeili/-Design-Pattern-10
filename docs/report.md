@@ -30,3 +30,9 @@
 
 ![image](https://github.com/Elie-jbeili/-Design-Pattern-10/assets/117976718/d949f332-9287-4acc-b5e4-b7d184db7af2)
 
+>
+- **TP2**
+  >
+>-J'ai d'abord séparé chaque classe dans des fichiers distincts, suivant la convention Java recommandant un seul fichier par classe. Ensuite, j'ai révisé chaque classe pour garantir qu'elle respecte le principe de responsabilité unique (SRP), en se concentrant sur une seule tâche. Pour réduire le couplage entre les couches de l'application, j'ai réorganisé le code pour que la couche de présentation n'ait pas d'impact direct sur les couches de service ou de stockage. En introduisant une abstraction de service plus flexible avec `FileHandler`, j'ai permis d'ajouter de nouvelles fonctionnalités sans modifier le code existant. Enfin, j'ai amélioré la représentation des todos en introduisant une classe `Todo`, ce qui rend le code plus modulaire, extensible et conforme aux bonnes pratiques de conception logicielle.
+
+![Screenshot 2024-02-09 232014](https://github.com/Elie-jbeili/-Design-Pattern-10/assets/117976718/fa80f02f-f636-4cdf-95f5-bd1a1a31d258)
