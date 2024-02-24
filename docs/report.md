@@ -36,3 +36,29 @@
 >-J'ai d'abord séparé chaque classe dans des fichiers distincts, suivant la convention Java recommandant un seul fichier par classe. Ensuite, j'ai révisé chaque classe pour garantir qu'elle respecte le principe de responsabilité unique (SRP), en se concentrant sur une seule tâche. Pour réduire le couplage entre les couches de l'application, j'ai réorganisé le code pour que la couche de présentation n'ait pas d'impact direct sur les couches de service ou de stockage. En introduisant une abstraction de service plus flexible avec `FileHandler`, j'ai permis d'ajouter de nouvelles fonctionnalités sans modifier le code existant. Enfin, j'ai amélioré la représentation des todos en introduisant une classe `Todo`, ce qui rend le code plus modulaire, extensible et conforme aux bonnes pratiques de conception logicielle.
 
 ![Screenshot 2024-02-09 232014](https://github.com/Elie-jbeili/-Design-Pattern-10/assets/117976718/fa80f02f-f636-4cdf-95f5-bd1a1a31d258)
+
+- **TP3**
+
+
+
+
+>1. **Command Pattern**:
+ > - **Description**: Encapsulates migration logic as a command object, promoting decoupling and reusability.
+  >- **Impact**: Enables dynamic invocation of migration operations without tight coupling, facilitating extensibility and maintainability.
+
+>2. **Factory Method Pattern**:
+>  - **Description**: Utilizes `DataSourceFactory` to create data source instances, promoting loose coupling and scalability.
+ > - **Impact**: Enhances maintainability by abstracting data source instantiation, allowing easy addition or modification of data sources.
+
+>3. **Transaction Management**:
+ > - **Description**: Handles transaction management for data integrity during migration.
+ > - **Impact**: Ensures consistency and reliability by wrapping migration process in transactions, with rollback capability in case of failures.
+
+>4. **Dependency Injection**:
+ > - **Description**: Employs dependency injection for `DataSourceFactory` and `Logger`, promoting flexibility and testability.
+  >- **Impact**: Facilitates unit testing and adherence to Dependency Inversion Principle (DIP) by decoupling `MigrateCommand` from concrete dependencies.
+
+>I find the course challenging, and it's difficult for me, despite dedicating hours of work. Unfortunately, I'm still struggling to produce high-quality code.
+> 
+> 
+>-![img.png](img.png)
