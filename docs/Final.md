@@ -92,5 +92,7 @@ This project is well-structured and modular, which facilitates the addition of n
 3. **Integration**: Depending on the interface's purpose, integrate its use into relevant parts of the application. For example, if adding a notification interface, you might call it in command classes after performing an action.
 
 ![Tp finale.svg](..%2F..%2F..%2F..%2F..%2F..%2FDownloads%2FTp%20finale.svg)
+![image](https://github.com/Elie-jbeili/-Design-Pattern-10/assets/117976718/a8cf6690-b7f5-4102-ae19-5efe7ae697de)
+
 
 It's my first year at this university, and the program at my previous institution was vastly different from the one here. Consequently, I'm not very proficient in coding with Java, which made it quite challenging for me. Unfortunately, I didn't receive much assistance with this project, so I had to rely on my own efforts. Despite my best attempts, the project didn't yield successful results, but I gave it my all.
