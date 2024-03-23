@@ -1,11 +1,12 @@
-package com.fges.todoapp;
+package com.fges.todoapp.Commands;
 
-import java.io.IOException;
+import com.fges.todoapp.Model.Task;
+
 import java.util.List;
 
 public class DeleteCommand implements Command {
     @Override
-    public void execute(List<Task> tasks, List<String> commandArgs) throws IOException {
+    public void execute(List<Task> tasks, List<String> commandArgs) {
         if (commandArgs.isEmpty()) {
             throw new IllegalArgumentException("Usage: delete <taskIndex>");
         }
@@ -16,6 +17,7 @@ public class DeleteCommand implements Command {
         }
 
         tasks.remove(taskIndex);
+        System.out.println("Task deleted successfully.");
     }
 
     @Override

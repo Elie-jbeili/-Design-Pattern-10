@@ -1,4 +1,6 @@
-package com.fges.todoapp;
+package com.fges.todoapp.Commands;
+
+import com.fges.todoapp.Model.Task;
 
 import java.io.IOException;
 import java.util.List;
